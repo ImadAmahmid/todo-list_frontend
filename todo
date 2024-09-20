@@ -1,0 +1,11 @@
+Add hover effect only when button is valid for loginù
+update lkogin icon to be open cadenas
+on deletye error (add error to front end dashboard)
+extract the error banner and make it a component
+use http interceptor to set the jwt token in requests 
+
+// hajar
+display error when character ar less than x
+
+remove place holder from sign up input and form
+edit form form button label change to update

@@ -1,0 +1,10 @@
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5
+}
+
+
+.ng-invalid:not(form) {
+    border: 1px solid red
+        /* red */
+}

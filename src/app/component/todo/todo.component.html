@@ -1,0 +1,54 @@
+<div *ngIf="isVisible">
+    <form [formGroup]="form">
+        <div *ngIf="error" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <strong class="font-bold">An error occured:</strong>
+            <span class="block sm:inline">{{ error }}</span>
+          </div>
+        <!-- Fill up the of Todo form  -->
+        <div *ngIf="item.isBeingUpdated" class="px-4 py-5 sm:px-6 flex flex-col">
+            <div class="leading-6 mb-6">
+                <label for="default-input"
+                    class="block mb-2 text-sm font-medium text-gray-900">Title</label>
+                <input type="text" id="default-input"
+                    formControlName="title"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+            </div>
+            <label for="message" class="block mb-2 text-sm font-medium text-gray-900">Description</label>
+            <textarea  required formControlName="description" id="description{{item.id}}" rows="4" minlength="10" required
+                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 "></textarea>
+            <br>
+            <div class="flex gap-2 justify-end">
+                <button type="submit" 
+                [disabled]="!form.valid" 
+                (click)="createOrUpdateItem()" 
+                class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Create</button>
+            </div>
+        </div>
+    
+    
+    
+        <!-- Display of Todos in read only mode -->
+        <div *ngIf="!item.isBeingUpdated" class="px-4 py-5 sm:px-6">
+            <div class="flex items-center justify-between">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">{{ item.title }} </h3>
+                <input (change)="toggleTodoStatus($event)" id="todo1" name="todo1" type="checkbox" [checked]="item.isCompleted"
+                    class="h-4 w-4 text-teal-600 focus:ring-teal-500 border-gray-300 rounded">
+            </div>
+            <div class="">
+                <div class="mt-1 max-w-2xl text-sm text-gray-500">{{ item.description }} </div>
+            </div>
+            <div class="mt-4 flex items-center justify-between">
+                <p class="text-sm font-medium text-gray-500">
+                    <span *ngIf="!item.isCompleted" class="text-green-600">{{ item.status }}</span>
+                    <span *ngIf="item.isCompleted" class="text-gray-600">{{ item.status }}</span>
+                </p>
+                <div class="flex gap-2">
+                    <button  (click)="onEdit()"  class="font-medium text-indigo-600 hover:text-indigo-500">Edit</button>
+                    <button  (click)="onDelete()" class="font-medium text-red-600 hover:text-red-500">Delete</button>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <br>
+    </form>
+</div>
